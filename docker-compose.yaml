@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    container_name: mongo
+    image: mongo
+    ports:
+     - "27019:27019"
+    # volumes:
+    #   - ./postgres-data:/var/lib/postgresql/data
+ 
+  server:
+    env_file: .env
+    container_name: pencilapi
+    image: pencil:1.0.0
+    build: .
+    restart: on-failure
+    command: bash -c "npm install nodemon && npm run hotload"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/usr/src/app/
+    depends_on:
+      - db
