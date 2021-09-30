@@ -26,8 +26,10 @@ router.route('/topics/:topic_id')
 
 // Question routes
 router.route('/questions')
+    .get(questionController.index)
     .post(questionController.new);
 
+router.post('/addTopic', questionController.addToTopic);
 
 // Export API routes
 module.exports = router;
