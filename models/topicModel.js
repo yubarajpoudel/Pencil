@@ -9,7 +9,7 @@ var topicsSchema = mongoose.Schema({
         required: true
     },
     parentEntity: {
-        type: Number,
+        type: String,
         required: false
     },
     active: {

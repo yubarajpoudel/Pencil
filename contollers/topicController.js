@@ -83,3 +83,18 @@ exports.delete = function (req, res) {
         });
     });
 };
+
+// add subtopic to topic
+const addSubTopicToTopic = function(childTopicId, parentTopicId) {
+    return Topic.findByIdAndUpdate(
+        childTopicId,
+      { parent_entity: parentTopicId },
+      function (err, docs) {
+        if (err){
+          console.log(err)
+        }
+        else{
+           console.log("Updated User : ", docs);
+        }
+    });
+}
