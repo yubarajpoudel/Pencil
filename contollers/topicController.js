@@ -84,17 +84,33 @@ exports.delete = function (req, res) {
     });
 };
 
+// handle subtopic
+exports.addToTopic = async function(req, res) {
+    var childTopicId = req.body.child_topic;
+    var parentTopicId = req.body.parent_topic;
+    if(childTopicId && parentTopicId) {
+        var topic = await addSubTopicToTopic(childTopicId, parentTopicId);
+        res.json({
+            status: "success",
+            "message": "subtopic added successfully"
+        })
+    } else {
+        return res.status(401).json({"message": "parent id or child id is missing"});
+    }
+
+}
+
 // add subtopic to topic
 const addSubTopicToTopic = function(childTopicId, parentTopicId) {
     return Topic.findByIdAndUpdate(
         childTopicId,
-      { parent_entity: parentTopicId },
+      { parentEntity: parentTopicId },
       function (err, docs) {
         if (err){
           console.log(err)
         }
         else{
-           console.log("Updated User : ", docs);
+           console.log("Updated Topic : ", docs);
         }
     });
 }

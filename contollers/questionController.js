@@ -43,9 +43,9 @@ exports.addToTopic = async function(req, res) {
     var topicId = req.body.topic_id;
     var questionId = req.body.question_id;
 
-    if(!topicId && !isNaN(topicId)) {
+    if(!topicId) {
         return res.status(401).json({
-            message: 'Missing topic id or topic id is not a number'
+            message: 'Missing topic id'
         });
     }
     if(!questionId) {
@@ -64,14 +64,14 @@ exports.addToTopic = async function(req, res) {
 const addTopicToQuestion = function(questionId, topicId) {
     return Question.findOneAndUpdate(
         {"_id": questionId },
-        { $push: { topics: parseInt(topicId) } },
+        { $push: { topics: topicId } },
         { new: true, useFindAndModify: false }
     );
   };
   
-  const addQuestionToTopic = function(topicId, question) {
-    return Topic.findOneAndUpdate(
-      { "topicId": parseInt(topicId) },
+  const addQuestionToTopic = function(id, question) {
+    return Topic.findByIdAndUpdate(
+      id,
       { $push: { questions: question } },
       { new: true, useFindAndModify: false }
     );

@@ -27,6 +27,7 @@ var topicsSchema = mongoose.Schema({
         default: Date.now
     }
 });
+
 // Export Topic model
 var Topic = module.exports = mongoose.model('topics', topicsSchema);
 module.exports.get = function (callback, limit) {

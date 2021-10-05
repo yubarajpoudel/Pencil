@@ -29,7 +29,8 @@ router.route('/questions')
     .get(questionController.index)
     .post(questionController.new);
 
-router.post('/addTopic', questionController.addToTopic);
+router.post('/questions/addTopic', questionController.addToTopic);
+router.post('/subtopics/add', topicController.addToTopic);
 
 // Export API routes
 module.exports = router;
