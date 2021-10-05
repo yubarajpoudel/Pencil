@@ -8,7 +8,7 @@ var questionSchema = mongoose.Schema({
     },
     topics: [
         {
-          type: Number,
+          type: String,
           ref: "Topic"
         }
       ],

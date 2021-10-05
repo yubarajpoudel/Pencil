@@ -53,7 +53,7 @@ exports.addToTopic = async function(req, res) {
             message: 'Missing question id'
         });
     }
-    await addQuestionToTopic(parseInt(topicId), questionId);
+    await addQuestionToTopic(topicId, questionId);
     await addTopicToQuestion(questionId, topicId);
     return res.json({
         message: 'Topic added successfully',
